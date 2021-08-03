@@ -19,7 +19,7 @@ const InputTodo = () => {
           body: JSON.stringify(body),
         });
 
-        // console.log(response);
+        console.log(response);
         input.value = "";
         window.location = "/";
       }
