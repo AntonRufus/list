@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(
+    circle,
+    #8548e9,
+    #845ec2,
+    #7862c7,
+    #6b66ca,
+    #5c6ace,
+    #4b6ed0,
+    #6077d4,
+    #7281d8,
+    #828bdc,
+    #aaa0e3,
+    #cab7eb,
+    #e5cff4 /* #fbeaff */
+  );
+  color: #222;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+body::-webkit-scrollbar {
+  width: 7px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #e5cff4; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #cab7eb; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 1px solid #8548e9; /* creates padding around scroll thumb */
+}
+
+body {
+  -moz-scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-width: thin; /* "auto" or "thin" */
+  -moz-scrollbar-color: white #8548e9; /* scroll thumb and track */
+  scrollbar-color: white #8548e9; /* scroll thumb and track */
+}
+
+::selection {
+  background-color: #8548e9;
+  color: white;
+}
