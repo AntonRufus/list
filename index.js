@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const cors = require("cors");
-const pool = require("./db");
-const path = require("path");
+const cors = require('cors');
+const pool = require('./db');
+const path = require('path');
 const PORT = process.env.PORT || 5000;
 
 // process.env.PORT
@@ -13,14 +13,14 @@ app.use(cors());
 app.use(express.json()); //req.body
 
 // express static //
-// app.use(express.static(path.join(__dirname, "client/build")));
-// app.use(express.static("client/build"));
-// app.use(express.static("./client/build"));
-// app.use("/", express.static("./client/build"));
+// app.use(express.static(path.join(__dirname, ''client/build'')));
+// app.use(express.static(''client/build''));
+// app.use(express.static(''./client/build''));
+// app.use(''/'', express.static(''./client/build''));
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   //server static content
-  app.use(express.static(path.join(__dirname, "client/build")));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
 console.log(__dirname);
@@ -28,13 +28,13 @@ console.log(__dirname);
 // routes
 
 // create a todo
-app.post("/todos", async (req, res) => {
+app.post('/todos', async (req, res) => {
   try {
     // console.log(req.body);
     const { description } = req.body;
 
     const newTodo = await pool.query(
-      "INSERT INTO todo (description) VALUES($1) RETURNING *;",
+      'INSERT INTO todo (description) VALUES($1) RETURNING *;',
       [description]
     );
 
@@ -45,9 +45,9 @@ app.post("/todos", async (req, res) => {
 });
 
 // get all todos
-app.get("/todos", async (req, res) => {
+app.get('/todos', async (req, res) => {
   try {
-    const allTodos = await pool.query("SELECT * FROM todo ORDER BY id;");
+    const allTodos = await pool.query('SELECT * FROM todo ORDER BY id;');
 
     res.json(allTodos.rows);
   } catch (error) {
@@ -56,12 +56,12 @@ app.get("/todos", async (req, res) => {
 });
 
 // get a todo
-app.get("/todos/:id", async (req, res) => {
+app.get('/todos/:id', async (req, res) => {
   try {
     // console.log(req.params);
     const { id } = req.params;
 
-    const todo = await pool.query("SELECT * FROM todo WHERE id = $1", [id]);
+    const todo = await pool.query('SELECT * FROM todo WHERE id = $1', [id]);
 
     res.json(todo.rows[0]);
   } catch (error) {
@@ -70,36 +70,36 @@ app.get("/todos/:id", async (req, res) => {
 });
 
 // update a todo
-app.put("/todos/:id", async (req, res) => {
+app.put('/todos/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
 
     const updatedTodo = await pool.query(
-      "UPDATE todo SET description = $1 WHERE id = $2",
+      'UPDATE todo SET description = $1 WHERE id = $2',
       [description, id]
     );
 
-    res.json("Todo was updated!");
+    res.json('Todo was updated!');
   } catch (error) {
     console.log(error.message);
   }
 });
 
 // delete a todo
-app.delete("/todos/:id", async (req, res) => {
+app.delete('/todos/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteTodo = await pool.query("DELETE FROM todo WHERE id = $1", [id]);
+    const deleteTodo = await pool.query('DELETE FROM todo WHERE id = $1', [id]);
 
-    res.json("Todo was deleted!");
+    res.json('Todo was deleted!');
   } catch (error) {
     console.log(error.message);
   }
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 app.listen(PORT, () => {
